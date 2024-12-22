@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nueva Reserva</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="cliente" class="form-label">Cliente</label>
+        <select class="form-select" id="cliente" name="cliente" required>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="mesa" class="form-label">Mesa</label>
+        <select class="form-select" id="mesa" name="mesa" required>
+            {% for mesa in mesas %}
+            <option value="{{ mesa.id }}">Mesa {{ mesa.numero }} - Capacidad {{ mesa.capacidad }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required>
+    </div>
+    <div class="mb-3">
+        <label for="hora" class="form-label">Hora</label>
+        <input type="time" class="form-control" id="hora" name="hora" required>
+    </div>
+    <div class="mb-3">
+        <label for="personas" class="form-label">Número de Personas</label>
+        <input type="number" class="form-control" id="personas" name="personas" min="1" required>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Reserva</button>
+</form>
+{% endblock %}

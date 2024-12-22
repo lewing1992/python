@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2>{{ producto.nombre }}</h2>
+<div class="row">
+    <div class="col-md-6">
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" class="img-fluid" alt="{{ producto.nombre }}">
+        {% else %}
+        <img src="{% static 'productos/placeholder.png' %}" class="img-fluid" alt="Sin imagen">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>Stock:</strong> {{ producto.stock }}</p>
+        <form method="post" action="{% url 'agregar_carrito' producto.id %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" max="{{ producto.stock }}" value="1">
+            </div>
+            <button type="submit" class="btn btn-success">Agregar al Carrito</button>
+        </form>
+    </div>
+</div>
+<a href="{% url 'listar_productos' %}" class="btn btn-secondary mt-3">Volver al Catálogo</a>
+{% endblock %}

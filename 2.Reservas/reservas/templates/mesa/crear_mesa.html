@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nueva Mesa</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="numero" class="form-label">Número de Mesa</label>
+        <input type="number" class="form-control" id="numero" name="numero" required>
+    </div>
+    <div class="mb-3">
+        <label for="capacidad" class="form-label">Capacidad</label>
+        <input type="number" class="form-control" id="capacidad" name="capacidad" required>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar Mesa</button>
+</form>
+{% endblock %}

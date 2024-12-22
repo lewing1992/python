@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+    <h1>¡Bienvenido al Sistema de Reservas!</h1>
+    <p>Gestión de mesas y reservas para tu local.</p>
+    <a href="{% url 'listar_reservas' %}" class="btn btn-primary">Ver Reservas</a>
+</div>
+{% endblock %}

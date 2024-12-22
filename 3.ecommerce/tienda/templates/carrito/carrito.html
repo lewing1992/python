@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Carrito de Compras</h2>
+<form method="get" class="mb-3">
+    <input type="text" class="form-control" name="filtro" placeholder="Filtrar por producto" value="{{ filtro }}">
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+</form>
+{% if user.is_authenticated %}
+<li class="nav-item">
+    <a class="btn btn-success" href="{% url 'historial_pagos' %}">Historial de Pagos</a>
+</li>
+{% endif %}
+{% if user.is_staff %}
+<li class="nav-item">
+    <a class="btn btn-success" href="{% url 'reporte_pagos' %}">Reporte de Pagos</a>
+</li>
+{% endif %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in carrito %}
+        <tr>
+            <td>{{ item.producto.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>${{ item.subtotal }}</td>
+            <td>
+                <a href="{% url 'eliminar_carrito' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center">Tu carrito está vacío</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h4>Total: ${{ total }}</h4>
+<!-- <a href="#" class="btn btn-success">Finalizar Compra</a> -->
+<a href="{% url 'procesar_pago' %}" class="btn btn-success">Pagar con PayPal</a>
+
+
+{% endblock %}
