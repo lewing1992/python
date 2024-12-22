@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>BIENVENIDO A GESTION DE GIMNASIO</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Clientes Registrados</h5>
+                    <p class="card-text display-4">{{ total_clientes }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Membresías Vigentes</h5>
+                    <p class="card-text display-4">{{ membresias_vigentes }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Pagos</h5>
+                    <p class="card-text display-4">{{ total_pagos }}</p>
+                    <h6>Total Recibido: ${{ monto_total_pagos }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if membresia %}Editar Membresía{% else %}Nueva Membresía{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select class="form-select" id="cliente" name="cliente">
+                {% for cliente in clientes %}
+                <option value="{{ cliente.id }}" {% if membresia and membresia.cliente.id == cliente.id %}selected{% endif %}>
+                    {{ cliente.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="tipo" name="tipo" value="{% if membresia %}{{ membresia.tipo }}{% endif %}">
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" value="{% if membresia %}{{ membresia.precio }}{% endif %}">
+        </div>
+        <div class="mb-3">
+            <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="{% if membresia %}{{ membresia.fecha_inicio }}{% endif %}">
+        </div>
+        <div class="mb-3">
+            <label for="fecha_fin" class="form-label">Fecha de Fin</label>
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" value="{% if membresia %}{{ membresia.fecha_fin }}{% endif %}">
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+</div>
+{% endblock %}

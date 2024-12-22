@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Membresías</h2>
+    <a href="{% url 'crear_membresia' %}" class="btn btn-primary mb-3">Agregar Membresía</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membresia in membresias %}
+            <tr>
+                <td>{{ membresia.cliente.nombre }}</td>
+                <td>{{ membresia.tipo }}</td>
+                <td>{{ membresia.precio }}</td>
+                <td>{{ membresia.fecha_inicio }}</td>
+                <td>{{ membresia.fecha_fin }}</td>
+                <td>
+                    <a href="{% url 'editar_membresia' membresia.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{% url 'eliminar_membresia' membresia.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
